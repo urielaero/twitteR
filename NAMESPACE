@@ -7,6 +7,7 @@ exportMethods(as.data.frame, screenName, show, favorited, replyToSN,
               protected, verified, location, lastStatus, show,
               description, name, id, statusText, truncated, statusSource)
 
+export("get_tweets_df") # for test
 export("search_twitter_and_store")
 export("get_latest_tweet_id")
 export("setup_twitter_oauth")

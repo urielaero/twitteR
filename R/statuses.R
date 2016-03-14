@@ -25,14 +25,17 @@ setRefClass("status",
               retweeted="logical",
               longitude="character",
               latitude="character",
+	      location="character",
               urls="data.frame"
               ),
             methods=list(
               initialize = function(json, ...) {
                 if (!missing(json)) {
+		  location_name <- NA
                   if ('user' %in% names(json)) {
                     userObj <- userFactory$new(json[['user']])
                     screenName <<- userObj$getScreenName()
+		    location_name <- json$user$location
                   } else if ('from_user' %in% names(json)) {
                     screenName <<- json[['from_user']]
                   } else if ("screen_name" %in% names(json)) {
@@ -40,6 +43,7 @@ setRefClass("status",
                   }  else {
                     screenName <<- "Unknown"
                   }
+		  location <<- location_name
                   
                   if (!is.null(json[['text']])) {
                     text <<- json[['text']]
